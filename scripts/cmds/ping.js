@@ -1,11 +1,17 @@
 module.exports = {
   name: "ping",
-  description: "Ping kawaii",
 
-  run: async (client, message, args) => {
-    const msg = await message.reply("ʚ je vérifie... 💫 ɞ");
-    const ping = msg.createdTimestamp - message.createdTimestamp;
+  run: async (event, api) => {
+    const start = Date.now();
 
-    msg.edit(`✨ ʚ Pong ! ɞ ma réactivité est de ${ping}ms 🌸💖`);
+    api.sendMessage("ʚ je vérifie... 💫 ɞ", event.threadID, (err, info) => {
+      const latency = Date.now() - start;
+
+      api.sendMessage(
+        `✨ ʚ Pong ! ɞ ${latency}ms 🌸💖`,
+        event.threadID,
+        info.messageID
+      );
+    });
   }
 };
