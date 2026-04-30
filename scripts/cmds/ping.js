@@ -1,17 +1,15 @@
 module.exports = {
   name: "ping",
+  version: "1.0.0",
+  author: "Saebot",
 
-  run: async (event, api) => {
-    const start = Date.now();
+  run: async ({ message }) => {
+    const time = Date.now();
 
-    api.sendMessage("ʚ je vérifie... 💫 ɞ", event.threadID, (err, info) => {
-      const latency = Date.now() - start;
+    message.reply("ʚ je vérifie... 💫 ɞ");
 
-      api.sendMessage(
-        `✨ ʚ Pong ! ɞ ${latency}ms 🌸💖`,
-        event.threadID,
-        info.messageID
-      );
-    });
+    const latency = Date.now() - time;
+
+    message.reply(`✨ ʚ Pong ! ɞ ${latency}ms 🌸💖`);
   }
 };
